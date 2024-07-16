@@ -61,8 +61,3 @@ export const initialCards = [
         isFlipped: true
     }
 ]
-
-export const API = "AIzaSyB7dk_40cwVc8CZsm1ugDKlEler0aj3KpM"; 
-export const channelId = "UCIak6JLVOjqhStxrL1Lcytw"; 
-
-export const fetchUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=k04tX2fvh0o&key=${API}`

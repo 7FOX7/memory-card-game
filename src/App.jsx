@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useRef } from 'react'; 
 import {useEffect} from 'react'; 
 import Box from '@mui/material/Box';
-import { ThemeProvider } from '@emotion/react';
-import { createTheme, Typography } from '@mui/material';
 import { Header } from './components/Header';
 import { initialCards } from './data/data';
 import { GameOver } from './components/GameOver';
@@ -12,14 +10,6 @@ import { Card } from './components/Card';
 import { CardBoard } from './components/CardBoard';
 import shuffle from './functionality/shuffle';
 import './styles/style.css'; 
-
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      'Kumbh Sans',
-    ]
-  }
-})
 
 const maxCards__easyMode = 3; 
 const maxCards__mediumMode = 4; 
@@ -144,37 +134,33 @@ function App() {
   )
 
   const playground = (
-    <ThemeProvider theme={theme}>
-      <Typography>
-        <div className="board">~
-        <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
-        <Header>
-          <Box ref={returnRef} onClick={handleRestart} sx={{cursor: "pointer", height: "fit-content"}}>
-            <img src="../src/assets/KOF_logo.png" alt="return to home" width="150px"/>
-          </Box>
-          <ScoreBoard score={score} bestScore={bestScore}/>
-        </Header>
-        <CardBoard>
-          {cards.map((card) => {
-            return <Card 
-              key={card.id}
-              cardId={card.id}
-              card={card} 
-              onClick={handleClick}
-              isFlipped={isFlipped}
-            />
-          })}
-        </CardBoard>
-        <p>{currentRound}/{lastRound}</p>
-        <Box className="footer">
-          <audio ref={audioRef} volume="true" autoPlay>
-            <source src="../src/music/main_theme.mp3"/>
-          </audio>
-          {audioPlaying ? <button onClick={handleAudioPlaying}>Turn audio Off</button> : <button onClick={handleAudioPlaying}>Turn audio On</button>}
-        </Box>
-        </div>
-      </Typography>
-    </ThemeProvider>
+    <div className="board">
+    <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
+    <Header>
+      <Box ref={returnRef} onClick={handleRestart} sx={{cursor: "pointer", height: "fit-content"}}>
+        <img src="../src/assets/KOF_logo.png" alt="return to home" width="150px"/>
+      </Box>
+      <ScoreBoard score={score} bestScore={bestScore}/>
+    </Header>
+    <CardBoard>
+      {cards.map((card) => {
+        return <Card 
+          key={card.id}
+          cardId={card.id}
+          card={card} 
+          onClick={handleClick}
+          isFlipped={isFlipped}
+        />
+      })}
+    </CardBoard>
+    <p>{currentRound}/{lastRound}</p>
+    <Box className="footer">
+      <audio ref={audioRef} volume="true" autoPlay>
+        <source src="../src/music/main_theme.mp3"/>
+      </audio>
+      {audioPlaying ? <button onClick={handleAudioPlaying}>Turn audio Off</button> : <button onClick={handleAudioPlaying}>Turn audio On</button>}
+    </Box>
+    </div>
   )   
 
   return playMode ? playground : starting

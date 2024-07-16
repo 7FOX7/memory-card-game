@@ -18,10 +18,6 @@ button {
         padding-inline: 10px; 
     }
 
-    .board .header {
-        
-    }
-
     .header .score-board {
         background-color: blue; 
         padding: 20px;  
