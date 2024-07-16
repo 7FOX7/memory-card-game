@@ -1,13 +1,25 @@
 import { useState } from 'react'; 
 import { useRef } from 'react'; 
+import {useEffect} from 'react'; 
+import Box from '@mui/material/Box';
+import { ThemeProvider } from '@emotion/react';
+import { createTheme, Typography } from '@mui/material';
+import { Header } from './components/Header';
 import { initialCards } from './data/data';
 import { GameOver } from './components/GameOver';
 import { ScoreBoard } from './components/ScoreBoard';
 import { Card } from './components/Card';
 import { CardBoard } from './components/CardBoard';
 import shuffle from './functionality/shuffle';
-import './App.css'
+import './styles/style.css'; 
 
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Kumbh Sans',
+    ]
+  }
+})
 
 const maxCards__easyMode = 3; 
 const maxCards__mediumMode = 4; 
@@ -15,8 +27,11 @@ const maxCards__hardMode = 5;
 
 function App() {
   const returnRef = useRef(null);
+  const audioRef = useRef(null); 
   const [playMode, setPlayMode] = useState(false); 
+  const [isFlipped, setIsFlipped] = useState(true); 
   const [cards, setCards] = useState(shuffle(initialCards)); 
+  const [audioPlaying, setAudioPlaying] = useState(true); 
   const [clickedCards, setClickedCards] = useState([]); 
   const [score, setScore] = useState(0); 
   const [bestScore, setBestScore] = useState(0); 
@@ -25,11 +40,14 @@ function App() {
   const currentRound = clickedCards.length;
   const lastRound = cards.length + 3; 
   
+
+  
   score > bestScore && setBestScore(score); 
   function handleClick(e) {
     const wasAlreadyClicked = clickedCards.find((clickedCard) => {
       return clickedCard === e.currentTarget.id; 
     })
+
     // const clickedCardsCopy = [...clickedCards]; 
     clickedCards.push(e.currentTarget.id);
 
@@ -43,10 +61,21 @@ function App() {
     else {
       const updatedCards = getRandomizedCards(cards, clickedCards, initialCards); 
       setClickedCards(clickedCards);
+      setIsFlipped(true); 
       setCards(shuffle(updatedCards)); 
+      setIsFlipped(true); 
     }
     setScore(score + 1);
   }
+
+  useEffect(() => {
+    const flipTimeout = setTimeout(() => {
+      setIsFlipped(false)
+    }, 1000)
+    return () => {
+      clearTimeout(flipTimeout); 
+    }
+  }, [score])
 
   function handleRestart(e) {
     if(e.currentTarget === returnRef.current) {
@@ -92,6 +121,19 @@ function App() {
     setPlayMode(true); 
   }
 
+  function handleAudioPlaying () {
+     if(audioPlaying) {
+      audioRef.current.pause(); 
+      setAudioPlaying(false)
+     }
+     else {
+      audioRef.current.play()
+      .then(() => {
+        setAudioPlaying(true); 
+      }) 
+     }
+  };
+
   const starting = (
     <>
       <p>This is a starting page!</p>
@@ -102,27 +144,41 @@ function App() {
   )
 
   const playground = (
-    <>
-      <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
-      <ScoreBoard score={score} bestScore={bestScore}/>
-      <CardBoard>
-        {cards.map((card) => {
-          return <Card 
-            key={card.id}
-            cardId={card.id}
-            card={card} 
-            onClick={handleClick}
-          />
-        })}
-      </CardBoard>
-      <p>{currentRound}/{lastRound}</p>
-      <button ref={returnRef} onClick={handleRestart}>Return to main menu</button>
-    </>
+    <ThemeProvider theme={theme}>
+      <Typography>
+        <div className="board">~
+        <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
+        <Header>
+          <Box ref={returnRef} onClick={handleRestart} sx={{cursor: "pointer", height: "fit-content"}}>
+            <img src="../src/assets/KOF_logo.png" alt="return to home" width="150px"/>
+          </Box>
+          <ScoreBoard score={score} bestScore={bestScore}/>
+        </Header>
+        <CardBoard>
+          {cards.map((card) => {
+            return <Card 
+              key={card.id}
+              cardId={card.id}
+              card={card} 
+              onClick={handleClick}
+              isFlipped={isFlipped}
+            />
+          })}
+        </CardBoard>
+        <p>{currentRound}/{lastRound}</p>
+        <Box className="footer">
+          <audio ref={audioRef} volume="true" autoPlay>
+            <source src="../src/music/main_theme.mp3"/>
+          </audio>
+          {audioPlaying ? <button onClick={handleAudioPlaying}>Turn audio Off</button> : <button onClick={handleAudioPlaying}>Turn audio On</button>}
+        </Box>
+        </div>
+      </Typography>
+    </ThemeProvider>
   )   
 
   return playMode ? playground : starting
 }
-
 
 function getRandomCard(arr, sourceArray) {
   const randomCard = sourceArray[Math.floor(Math.random() * sourceArray.length)]; 
