@@ -3,61 +3,61 @@ import { nanoid } from "nanoid"
 export const initialCards = [
     {
         id: nanoid(8), 
-        content: "Sample content 1", 
-        isFlipped: true
+        characterName: "Kyo", 
+        characterImage: "../../src/assets/kyo_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 2", 
-        isFlipped: true
+        characterName: "Ryo", 
+        characterImage: "../../src/assets/ryo_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 3", 
-        isFlipped: true
+        characterName: "Mai", 
+        characterImage: "../../src/assets/mai_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 4", 
-        isFlipped: true
+        characterName: "Andy", 
+        characterImage: "../../src/assets/andy_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 5", 
-        isFlipped: true
+        characterName: "Elisabeth", 
+        characterImage: "../../src/assets/elisabeth_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 6", 
-        isFlipped: true
+        characterName: "Kim", 
+        characterImage: "../../src/assets/kim_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 7",
-        isFlipped: true
+        characterName: "King", 
+        characterImage: "../../src/assets/king_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 8", 
-        isFlipped: true
+        characterName: "Shenwu", 
+        characterImage: "../../src/assets/shenwu_fighter.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        content: "Sample content 9", 
-        isFlipped: true
+        characterName: "Terry", 
+        characterImage: "../../src/assets/terry_fighter.jpg"
     }, 
     
     {
         id: nanoid(8), 
-        content: "Sample content 10", 
-        isFlipped: true
+        characterName: "Duolon", 
+        characterImage: "../../src/assets/duolon_fighter.jpg"
     }
 ]

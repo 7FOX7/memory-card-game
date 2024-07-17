@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useRef } from 'react'; 
 import {useEffect} from 'react'; 
 import Box from '@mui/material/Box';
+import HomeIcon from '@mui/icons-material/Home';
+import { Board } from './components/Board';
 import { Header } from './components/Header';
 import { initialCards } from './data/data';
 import { GameOver } from './components/GameOver';
 import { ScoreBoard } from './components/ScoreBoard';
-import { Card } from './components/Card';
+import { PlayingCard } from './components/PlayingCard';
 import { CardBoard } from './components/CardBoard';
 import shuffle from './functionality/shuffle';
 import './styles/style.css'; 
@@ -21,7 +23,7 @@ function App() {
   const [playMode, setPlayMode] = useState(false); 
   const [isFlipped, setIsFlipped] = useState(true); 
   const [cards, setCards] = useState(shuffle(initialCards)); 
-  const [audioPlaying, setAudioPlaying] = useState(true); 
+  const [audioPlaying, setAudioPlaying] = useState(false); 
   const [clickedCards, setClickedCards] = useState([]); 
   const [score, setScore] = useState(0); 
   const [bestScore, setBestScore] = useState(0); 
@@ -31,7 +33,7 @@ function App() {
   const lastRound = cards.length + 3; 
   
 
-  
+
   score > bestScore && setBestScore(score); 
   function handleClick(e) {
     const wasAlreadyClicked = clickedCards.find((clickedCard) => {
@@ -53,7 +55,6 @@ function App() {
       setClickedCards(clickedCards);
       setIsFlipped(true); 
       setCards(shuffle(updatedCards)); 
-      setIsFlipped(true); 
     }
     setScore(score + 1);
   }
@@ -134,33 +135,40 @@ function App() {
   )
 
   const playground = (
-    <div className="board">
-    <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
-    <Header>
-      <Box ref={returnRef} onClick={handleRestart} sx={{cursor: "pointer", height: "fit-content"}}>
-        <img src="../src/assets/KOF_logo.png" alt="return to home" width="150px"/>
+    <Board>
+      <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
+      <Header>
+        <Box ref={returnRef} onClick={handleRestart} sx={{
+          cursor: "pointer",
+          height: "47px", 
+          width: "50px",
+          background: "green", 
+          borderRadius: "50%", 
+          display: "flex", 
+          justifyContent: "center", 
+          alignItems: "center"}}>
+          <HomeIcon fontSize="large"/>
+        </Box>
+        <ScoreBoard score={score} bestScore={bestScore}/>
+      </Header>
+      <CardBoard>
+        {cards.map((card) => {
+          return <PlayingCard 
+            key={card.id}
+            card={card} 
+            onClick={handleClick}
+            isFlipped={isFlipped}
+          />
+        })}
+      </CardBoard>
+      <p>{currentRound}/{lastRound}</p>
+      <Box className="footer">
+        <audio ref={audioRef} volume="true" autoPlay>
+          <source src="../src/music/main_theme.mp3"/>
+        </audio>
+        {audioPlaying ? <button onClick={handleAudioPlaying}>Turn audio Off</button> : <button onClick={handleAudioPlaying}>Turn audio On</button>}
       </Box>
-      <ScoreBoard score={score} bestScore={bestScore}/>
-    </Header>
-    <CardBoard>
-      {cards.map((card) => {
-        return <Card 
-          key={card.id}
-          cardId={card.id}
-          card={card} 
-          onClick={handleClick}
-          isFlipped={isFlipped}
-        />
-      })}
-    </CardBoard>
-    <p>{currentRound}/{lastRound}</p>
-    <Box className="footer">
-      <audio ref={audioRef} volume="true" autoPlay>
-        <source src="../src/music/main_theme.mp3"/>
-      </audio>
-      {audioPlaying ? <button onClick={handleAudioPlaying}>Turn audio Off</button> : <button onClick={handleAudioPlaying}>Turn audio On</button>}
-    </Box>
-    </div>
+    </Board>
   )   
 
   return playMode ? playground : starting
