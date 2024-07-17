@@ -41,31 +41,34 @@ function App() {
     })
 
     // const clickedCardsCopy = [...clickedCards]; 
-    clickedCards.push(e.currentTarget.id);
+    if(typeof(wasAlreadyClicked) !== "undefined") {
+      setGameShouldEnd(true); 
+      setGameIsLost(true)
+      return; 
+    }
 
-    if(typeof(wasAlreadyClicked) !== "undefined" || currentRound + 1 === lastRound) {
+    clickedCards.push(e.currentTarget.id);
+    if(currentRound + 1 === lastRound) {
       setGameShouldEnd(true)
-      if(typeof(wasAlreadyClicked) !== "undefined") {
-        setGameIsLost(true); 
-        return; 
-      }
     }
     else {
       const updatedCards = getRandomizedCards(cards, clickedCards, initialCards); 
       setClickedCards(clickedCards);
-      setIsFlipped(true); 
-      setCards(shuffle(updatedCards)); 
+      setCards(shuffle(updatedCards));
+      setIsFlipped(true);  
     }
     setScore(score + 1);
   }
 
   useEffect(() => {
-    const flipTimeout = setTimeout(() => {
-      setIsFlipped(false)
-    }, 1000)
-    return () => {
-      clearTimeout(flipTimeout); 
-    }
+    // const flippingTimeout = setTimeout(() => {
+    //   setIsFlipped(false)
+    // }, 1000)
+    // return () => {
+    //   clearTimeout(flippingTimeout); 
+    // }
+    
+    setIsFlipped(false)
   }, [score])
 
   function handleRestart(e) {
