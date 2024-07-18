@@ -10,16 +10,22 @@ import { GameOver } from './components/GameOver';
 import { ScoreBoard } from './components/ScoreBoard';
 import { PlayingCard } from './components/PlayingCard';
 import { CardBoard } from './components/CardBoard';
+import { Footer } from './components/Footer';
 import shuffle from './functionality/shuffle';
+import audioFactory from './functionality/audioFactory/audioFactory';
 import './styles/style.css'; 
 
 const maxCards__easyMode = 3; 
 const maxCards__mediumMode = 4; 
 const maxCards__hardMode = 5; 
 
+const mainTheme = audioFactory("../src/sounds/main_theme.mp3"); 
+
 function App() {
   const returnRef = useRef(null);
-  const audioRef = useRef(null); 
+  const flippingRef = useRef(null); 
+  const [screenWidth, setScreenWidth] = useState(innerWidth); 
+  const [screenHeight, setScreenHeight] = useState(innerHeight); 
   const [playMode, setPlayMode] = useState(false); 
   const [isFlipped, setIsFlipped] = useState(true); 
   const [cards, setCards] = useState(shuffle(initialCards)); 
@@ -31,8 +37,17 @@ function App() {
   const [gameIsLost, setGameIsLost] = useState(false);   
   const currentRound = clickedCards.length;
   const lastRound = cards.length + 3; 
-  
 
+  useEffect(() => {
+    function handleResize() {
+      setScreenWidth(innerWidth); 
+      setScreenHeight(innerHeight); 
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, []); 
 
   score > bestScore && setBestScore(score); 
   function handleClick(e) {
@@ -52,6 +67,7 @@ function App() {
       setGameShouldEnd(true)
     }
     else {
+      flippingRef.current.play(); 
       const updatedCards = getRandomizedCards(cards, clickedCards, initialCards); 
       setClickedCards(clickedCards);
       setCards(shuffle(updatedCards));
@@ -117,11 +133,11 @@ function App() {
 
   function handleAudioPlaying () {
      if(audioPlaying) {
-      audioRef.current.pause(); 
+      mainTheme.pause(); 
       setAudioPlaying(false)
      }
      else {
-      audioRef.current.play()
+      mainTheme.play()
       .then(() => {
         setAudioPlaying(true); 
       }) 
@@ -138,7 +154,7 @@ function App() {
   )
 
   const playground = (
-    <Board>
+    <Board screenWidth={screenWidth} screenHeight={screenHeight}>
       <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
       <Header>
         <Box ref={returnRef} onClick={handleRestart} sx={{
@@ -164,13 +180,11 @@ function App() {
           />
         })}
       </CardBoard>
-      <p>{currentRound}/{lastRound}</p>
-      <Box className="footer">
-        <audio ref={audioRef} volume="true" autoPlay>
-          <source src="../src/music/main_theme.mp3"/>
-        </audio>
-        {audioPlaying ? <button onClick={handleAudioPlaying}>Turn audio Off</button> : <button onClick={handleAudioPlaying}>Turn audio On</button>}
-      </Box>
+      <Footer onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
+      {/* <p>{currentRound}/{lastRound}</p> */}
+      <audio ref={flippingRef} >
+        <source src="../src/sounds/flip.mp3"/>
+      </audio>
     </Board>
   )   
 
@@ -200,21 +214,5 @@ function getRandomizedCards(cards, clickedCards, initialCards) {
   return randomizedCards
 } 
 
-
-// lets assume these are not clicked cards: 
-
-// sample card 1
-// sample card 5
-// sample card 9
-
-// this is the current array of cards randomly selected: 
-
-// sample card 2
-// sample card 5
-// sample card 3
-// sample card 4
-
-// randomCard = getRandomCard(nonClickedCard, cards)
-// randomizedCards = [...cards, randomCard]
 
 export default App

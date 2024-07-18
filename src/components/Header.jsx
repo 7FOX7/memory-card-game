@@ -15,7 +15,6 @@ export const Header = ({children}) => {
                     background: "blue", 
                     display: "flex", 
                     justifyContent: "space-between", 
-                    marginBottom: "10px"
                 }}>
                     {children}
                 </Box>
@@ -26,7 +25,6 @@ export const Header = ({children}) => {
                     background: "blue", 
                     display: "flex", 
                     justifyContent: "space-between", 
-                    marginBottom: "10px"
                 }}>
                     {children}
                 </Box>
@@ -37,7 +35,7 @@ export const Header = ({children}) => {
                     background: "blue", 
                     display: "flex", 
                     justifyContent: "space-between", 
-                    marginBottom: "20px"
+                    marginBottom: "10px"
                 }}>
                     {children}
                 </Box>
@@ -48,7 +46,7 @@ export const Header = ({children}) => {
                     background: "blue", 
                     display: "flex", 
                     justifyContent: "space-between",
-                    marginBottom: "20px"
+                    marginBottom: "10px"
                 }}>
                     {children}
                 </Box>

@@ -1,25 +1,41 @@
 import Box from "@mui/material/Box"
-import useMediaQuery from "@mui/material/useMediaQuery"
 import { theme } from "../styles/style"
+import { useMediaQuery } from "@mui/material"
 
-export const Board = ({children}) => {
+export const Board = ({children, screenWidth, screenHeight}) => {
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
-    // const isTablet = useMediaQuery(theme.breakpoints.between('tablet', 'laptop')); 
-    // const isLaptop = useMediaQuery(theme.breakpoints.between('laptop', 'desktop')); 
-    // const isDesktop = useMediaQuery(theme.breakpoints.up('desktop')); 
-
+    const updatedWidth = screenWidth + 150; 
+    console.log(screenWidth); 
+    console.log(updatedWidth); 
     return (
         <>
-            <Box sx={{
-                width: "100vw",
-                height: "100vh",
-                background: "red", 
-                padding: "10px", 
-                display: "flex", 
-                flexDirection: "column", 
-            }}>
-            {children}
-            </Box>
+            {isMobile ? (
+                <Box sx={{
+                    width: "100vw",
+                    height: "100vh",
+                    backgroundImage: `url(../../src/assets/main_background.gif)`,
+                    backgroundSize: `${updatedWidth}px ${screenHeight}px`, 
+                    backgroundRepeat: "no-repeat", 
+                    display: "flex", 
+                    flexDirection: "column", 
+                    justifyContent: "space-between"
+                }}>
+                {children}
+                </Box>
+            ) : (
+                <Box sx={{
+                    width: "100vw",
+                    height: "100vh",
+                    backgroundImage: `url(../../src/assets/main_background.gif)`,
+                    backgroundSize: `${screenWidth}px ${screenHeight}px`, 
+                    backgroundRepeat: "no-repeat", 
+                    display: "flex", 
+                    flexDirection: "column", 
+                    justifyContent: "space-between"
+                }}>
+                {children}
+                </Box>
+            )}
         </>
     )
 }
