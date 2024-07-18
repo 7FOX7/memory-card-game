@@ -6,22 +6,21 @@ import ReactCardFlip from "react-card-flip";
 
 export const PlayingCard = ({onClick, card, isFlipped}) => {
     return (
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedFrontToBack="1" flipSpeedBackToFront="1">  
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedFrontToBack="1" flipSpeedBackToFront="1" containerStyle={{width: "fit-content"}}>  
             <Card id={card.id} onClick={onClick} sx={{ 
                 width: "145px", 
                 height: "190px", 
-                backgroundImage: `url(${card.characterImage})`, 
+                backgroundImage: `url(${card.characterImage_front})`, 
                 backgroundSize: "cover", 
             }}>
             </Card> 
             <Card sx={{
                 width: "145px", 
-                height: "190px"
-            }}>
-                <CardContent>
-                    <p>this is the back</p>
-                </CardContent>
-            </Card>  
+                height: "190px", 
+                backgroundImage: `url(${card.characterImage_back})`, 
+                backgroundSize: "cover", 
+                
+            }}></Card>  
         </ReactCardFlip>
     )
 }
