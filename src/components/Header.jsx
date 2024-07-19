@@ -1,23 +1,52 @@
-import Box from "@mui/material/Box"
-import { theme } from "../styles/style"
-import { useMediaQuery } from "@mui/material"
+import { useState } from "react";
+import Box from "@mui/material/Box"; 
+import AppBar from "@mui/material/AppBar"; 
+import Toolbar from "@mui/material/Toolbar"; 
+import MenuIcon from '@mui/icons-material/Menu';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import { theme } from "../styles/style"; 
+import { useMediaQuery } from "@mui/material"; 
+
 
 export const Header = ({children}) => {
+    const [anchorEl, setAnchorEl] = useState(null); 
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
     const isTablet = useMediaQuery(theme.breakpoints.between('tablet', 'laptop')); 
     const isLaptop = useMediaQuery(theme.breakpoints.between('laptop', 'desktop'));
-    const isDesktop = useMediaQuery(theme.breakpoints.up('desktop')); 
+    const isDesktop = useMediaQuery(theme.breakpoints.up('desktop'));
+    
+    const open = Boolean(anchorEl); 
+
+    function handleMenuButton(e) {
+        setAnchorEl(e.currentTarget); 
+    }
+
+    function handleClose() {
+        setAnchorEl(null); 
+    }
 
     return (
         <>
             {isMobile && (
-                <Box component="header" sx={{
-                    background: "blue", 
-                    display: "flex", 
-                    justifyContent: "space-between", 
-                }}>
-                    {children}
-                </Box>
+                <AppBar position="static">
+                    <Toolbar sx={{background: "red"}}>
+                        <IconButton onClick={handleMenuButton}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu 
+                            id="header-menu"
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            open={open}
+                        >
+                            <MenuItem onClick={handleClose}>
+                                {children}
+                            </MenuItem>
+                        </Menu>
+                    </Toolbar>
+                </AppBar>
             )}
             
             {isTablet && (

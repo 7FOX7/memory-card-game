@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRef } from 'react'; 
 import {useEffect} from 'react'; 
 import Box from '@mui/material/Box';
-import HomeIcon from '@mui/icons-material/Home';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { Board } from './components/Board';
 import { Header } from './components/Header';
 import { initialCards } from './data/data';
@@ -23,7 +23,8 @@ const mainTheme = audioFactory("../src/sounds/main_theme.mp3");
 
 function App() {
   const returnRef = useRef(null);
-  const flippingRef = useRef(null); 
+  const flippingRef = useRef(null);
+  const helpPopupRef = useRef(null);  
   const [screenWidth, setScreenWidth] = useState(innerWidth); 
   const [screenHeight, setScreenHeight] = useState(innerHeight); 
   const [playMode, setPlayMode] = useState(false); 
@@ -131,7 +132,8 @@ function App() {
     setPlayMode(true); 
   }
 
-  function handleAudioPlaying () {
+  function handleAudioPlaying (e) {
+    e.preventDefault(); 
      if(audioPlaying) {
       mainTheme.pause(); 
       setAudioPlaying(false)
@@ -159,16 +161,16 @@ function App() {
       <Header>
         <Box ref={returnRef} onClick={handleRestart} sx={{
           cursor: "pointer",
-          height: "47px", 
-          width: "50px",
-          background: "green", 
+          height: "42px", 
+          width: "46px",
+          border: "3px solid rgb(0, 0, 0)",
           borderRadius: "50%", 
           display: "flex", 
           justifyContent: "center", 
-          alignItems: "center"}}>
-          <HomeIcon fontSize="large"/>
+          alignItems: "flex-start"}}>
+          <HomeOutlinedIcon fontSize="large"/>
         </Box>
-        <ScoreBoard score={score} bestScore={bestScore}/>
+        {/* <ScoreBoard score={score} bestScore={bestScore}/> */}
       </Header>
       <CardBoard>
         {cards.map((card) => {
@@ -180,7 +182,7 @@ function App() {
           />
         })}
       </CardBoard>
-      <Footer onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
+      <Footer onClick={handleAudioPlaying} audioPlaying={audioPlaying} helpPopup={helpPopupRef} screenWidth={screenWidth} screenHeight={screenHeight}/>
       {/* <p>{currentRound}/{lastRound}</p> */}
       <audio ref={flippingRef} >
         <source src="../src/sounds/flip.mp3"/>

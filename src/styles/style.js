@@ -10,12 +10,12 @@ export const theme = createTheme({
         }
     }, 
     typography: {
-        scoreBoard_typography: {
+        font1: {
             fontFamily: "'Kumbh Sans'"
         }, 
-        cardBoard_typography: {
+        font2: {
             fontFamily: "'Ga Maamli'"
-        }
+        }, 
     }
 })
 

@@ -22,7 +22,7 @@ export const ScoreBoard = ({score, bestScore}) => {
                         borderRadius: "15px", 
                         fontSize: "1.15em", 
                         fontWeight: "600", 
-                        fontFamily: theme.typography.scoreBoard_typography, 
+                        fontFamily: theme.typography.font1, 
                         color: "white"
                     }}>
                         <span>your score is: {score}</span>
@@ -39,7 +39,7 @@ export const ScoreBoard = ({score, bestScore}) => {
                         borderRadius: "15px", 
                         fontSize: "1.35em", 
                         fontWeight: "600", 
-                        fontFamily: theme.typography.scoreBoard_typography, 
+                        fontFamily: theme.typography.font1, 
                         color: "white"
                     }}>
                         <span>your score is: {score}</span>
@@ -56,7 +56,7 @@ export const ScoreBoard = ({score, bestScore}) => {
                         borderRadius: "15px", 
                         fontSize: "1.65em", 
                         fontWeight: "600", 
-                        fontFamily: theme.typography.scoreBoard_typography, 
+                        fontFamily: theme.typography.font1, 
                         color: "white"
                     }}>
                         <span>your score is: {score}</span>
@@ -73,7 +73,7 @@ export const ScoreBoard = ({score, bestScore}) => {
                         borderRadius: "25px", 
                         fontSize: "1.85em", 
                         fontWeight: "600", 
-                        fontFamily: theme.typography.scoreBoard_typography, 
+                        fontFamily: theme.typography.font1, 
                         color: "white"
                     }}>
                         <span>your score is: {score}</span>
