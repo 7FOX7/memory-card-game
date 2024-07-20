@@ -13,14 +13,17 @@ export const CardBoard = ({children}) => {
         <>  
             {isMobile && (
             <Box sx={{
-                padding: "8px", 
-                display: "grid",  
-                overflow: "scroll", 
+                display: "grid", 
+                height: "70%", 
+                justifyItems: "center", 
+                alignItems: "center", 
+                overflowY: "scroll", 
+                overflowX: "hidden", 
                 fontFamily: theme.typography.cardBoard_typography, 
                 width: "100%", 
-                height: "65%", 
                 gridTemplateColumns: "auto auto", 
-                rowGap: "5px"
+                paddingBlock: "5px", 
+                rowGap: "8px"
             }}>
                 {children}
             </Box>

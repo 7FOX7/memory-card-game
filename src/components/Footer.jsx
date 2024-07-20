@@ -4,15 +4,14 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import Box from '@mui/material/Box';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Modal from '@mui/material/Modal';
-import { Button, Typography, useMediaQuery } from '@mui/material';
+import { Button, useMediaQuery } from '@mui/material';
 import { theme } from '../styles/style';
-import { ThemeProvider } from '@mui/material';
 
-export const Footer = ({onClick, audioPlaying, screenWidth, screenHeight}) => {
+export const Footer = ({screenWidth, screenHeight, onClick, audioPlaying}) => {
     const [popup, setPopup] = useState(null); 
     const open = Boolean(popup); 
-    const top = screenHeight / 1.5; 
-    const left = screenWidth / 2.6; 
+    const top = Math.floor(screenHeight / 1.5); 
+    const left = Math.floor(screenWidth / 2.6); 
 
     function handleClick() {
         setPopup(true); 
@@ -55,7 +54,7 @@ export const Footer = ({onClick, audioPlaying, screenWidth, screenHeight}) => {
                     </Menu> */}
                     <Modal open={open} onClose={handleClose}>
                         <Box>
-                            <Box sx={{position: "absolute", paddingBlock: "15px", left: "30px", top: `${top}px`, zIndex: "1", width: "50%", height: "50%", overflow: "hidden", textWrap: "wrap", color: "#fff", fontSize: "1em", fontFamily: `${theme.typography.font1.fontFamily}`}}>
+                            <Box sx={{position: "absolute", paddingBlock: "15px", left: "30px", top: `${top}px`, zIndex: "1", width: "50%", height: "fit-content", overflow: "hidden", textWrap: "wrap", color: "#fff", fontSize: "1em", fontFamily: `${theme.typography.font1.fontFamily}`}}>
                                 <span>
                                 The rules are simple: do not click on the same card twice. 
                                 Try to get the highest possible score. Good luck!

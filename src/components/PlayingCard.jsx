@@ -4,22 +4,29 @@ import Card from "@mui/material/Card";
 import ReactCardFlip from "react-card-flip"; 
 
 
-export const PlayingCard = ({onClick, card, isFlipped}) => {
+export const PlayingCard = ({onClick, card, isFlipped, screenWidth}) => {
+    const cardWidth = Math.floor((screenWidth / 3) + 15); 
+    const cardHeight = Math.floor((screenWidth / 3) + 65);  
+
+    console.log('card width: ' + cardWidth); 
     return (
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedFrontToBack="1.5" flipSpeedBackToFront="1.5" containerStyle={{width: "fit-content"}}>  
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedFrontToBack="1.5" flipSpeedBackToFront="1.5" containerStyle={{
+            width: "fit-content",
+            height: "fit-content"
+        }}>  
             <Card id={card.id} onClick={onClick} sx={{ 
-                width: "145px", 
-                height: "190px", 
+                width: `${cardWidth}px`, 
+                height: `${cardHeight}px`, 
                 backgroundImage: `url(${card.characterImage_front})`, 
-                backgroundSize: "145px 190px", 
+                backgroundSize: `${cardWidth}px ${cardHeight}px`,
+                boxShadow: "0px 0px 3px 2px rgb(0, 0, 0)" 
             }}>
             </Card> 
             <Card sx={{
-                width: "145px", 
-                height: "190px", 
+                width: `${cardWidth}px`, 
+                height: `${cardHeight}px`, 
                 backgroundImage: `url(${card.characterImage_back})`, 
-                backgroundSize: "145px 190px", 
-                
+                backgroundSize: `${cardWidth}px ${cardHeight}px`
             }}></Card>  
         </ReactCardFlip>
     )

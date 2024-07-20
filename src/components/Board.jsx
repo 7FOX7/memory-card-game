@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mui/material"
 
 export const Board = ({children, screenWidth, screenHeight}) => {
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
-    const updatedWidth = screenWidth + 150; 
+    const updatedWidth = Math.floor(screenWidth + 150); 
     console.log(screenWidth); 
     console.log(updatedWidth); 
     return (

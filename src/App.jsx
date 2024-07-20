@@ -1,6 +1,6 @@
 import { useState } from 'react'; 
 import { useRef } from 'react'; 
-import {useEffect} from 'react'; 
+import {useEffect} from 'react';  
 import Box from '@mui/material/Box';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { Board } from './components/Board';
@@ -8,29 +8,31 @@ import { Header } from './components/Header';
 import { initialCards } from './data/data';
 import { GameOver } from './components/GameOver';
 import { ScoreBoard } from './components/ScoreBoard';
+import { MainBody } from './components/MainBody';
 import { PlayingCard } from './components/PlayingCard';
 import { CardBoard } from './components/CardBoard';
 import { Footer } from './components/Footer';
+import { RoundDisplayer } from './components/RoundDisplayer';
+import audioFactory from './functionality/audioFactory';
 import shuffle from './functionality/shuffle';
-import audioFactory from './functionality/audioFactory/audioFactory';
+import getRandomCard from './functionality/getRandomCard';
 import './styles/style.css'; 
 
 const maxCards__easyMode = 3; 
 const maxCards__mediumMode = 4; 
 const maxCards__hardMode = 5; 
 
-const mainTheme = audioFactory("../src/sounds/main_theme.mp3"); 
-
+// const mainTheme = audioFactory("../src/sounds/main_theme.mp3")
 function App() {
   const returnRef = useRef(null);
   const flippingRef = useRef(null);
-  const helpPopupRef = useRef(null);  
   const [screenWidth, setScreenWidth] = useState(innerWidth); 
   const [screenHeight, setScreenHeight] = useState(innerHeight); 
+  const [mainTheme, setMainTheme] = useState(audioFactory(null)); 
   const [playMode, setPlayMode] = useState(false); 
-  const [isFlipped, setIsFlipped] = useState(true); 
+  const [audioPlaying, setAudioPlaying] = useState(true);  
+  const [isFlipped, setIsFlipped] = useState(false); 
   const [cards, setCards] = useState(shuffle(initialCards)); 
-  const [audioPlaying, setAudioPlaying] = useState(false); 
   const [clickedCards, setClickedCards] = useState([]); 
   const [score, setScore] = useState(0); 
   const [bestScore, setBestScore] = useState(0); 
@@ -38,6 +40,19 @@ function App() {
   const [gameIsLost, setGameIsLost] = useState(false);   
   const currentRound = clickedCards.length;
   const lastRound = cards.length + 3; 
+
+  
+  useEffect(() => {
+    if(playMode) {
+      const mainThemeInstance = audioFactory("../src/sounds/main_theme.mp3"); 
+      setAudioPlaying(true); 
+      mainThemeInstance.play(); 
+      setMainTheme(mainThemeInstance)
+    }
+    else {
+      (setAudioPlaying(false), mainTheme.pause(), setMainTheme(null))
+    }
+  }, [playMode])
 
   useEffect(() => {
     function handleResize() {
@@ -49,6 +64,18 @@ function App() {
       window.removeEventListener('resize', handleResize)
     }
   }, []); 
+
+  useEffect(() => {
+    if(isFlipped) {
+      const updatedCards = getRandomizedCards(cards, clickedCards, initialCards); 
+      setTimeout(() => {
+        setCards(updatedCards);
+      }, 1000) 
+      setTimeout(() => {
+        setIsFlipped(false)
+      }, 1500)
+    } 
+  }, [score])
 
   score > bestScore && setBestScore(score); 
   function handleClick(e) {
@@ -69,24 +96,11 @@ function App() {
     }
     else {
       flippingRef.current.play(); 
-      const updatedCards = getRandomizedCards(cards, clickedCards, initialCards); 
       setClickedCards(clickedCards);
-      setCards(shuffle(updatedCards));
-      setIsFlipped(true);  
+      setIsFlipped(true); 
     }
     setScore(score + 1);
   }
-
-  useEffect(() => {
-    // const flippingTimeout = setTimeout(() => {
-    //   setIsFlipped(false)
-    // }, 1000)
-    // return () => {
-    //   clearTimeout(flippingTimeout); 
-    // }
-    
-    setIsFlipped(false)
-  }, [score])
 
   function handleRestart(e) {
     if(e.currentTarget === returnRef.current) {
@@ -100,11 +114,39 @@ function App() {
     setGameIsLost(false); 
   }
 
+  function handleAudioPlaying () {
+    if(audioPlaying && mainTheme) {
+     mainTheme.pause();  
+     setAudioPlaying(false)
+    }
+    else {
+     mainTheme.play()
+     .then(() => {
+       setAudioPlaying(true); 
+     }) 
+    }
+ };
+  
+  function getRandomizedCards(cards, clickedCards, initialCards) { 
+    const nonClickedCards = initialCards.filter((card) => {
+      const cardId = card.id; 
+      return !clickedCards.includes(cardId); 
+    }); 
+    const randomCard = getRandomCard(cards, nonClickedCards); 
+    const cardsCopy = [...cards]; 
+
+    // cardCopy.shift() - returns an element. that is why we call differently
+    cardsCopy.shift(); 
+    const randomizedCards = nonClickedCards.length === 0 ? cards : [...cardsCopy, randomCard]; 
+    const updatedCards = shuffle(randomizedCards); 
+    
+    return updatedCards; 
+  } 
+
   function startNewGame(e) {
     if(e.currentTarget.id === "easyMode") {
       const cards__easyMode = []; 
       for(let i = 0; i < maxCards__easyMode; i++) {
-        // cards__easyMode.push(cards[Math.floor(Math.random() * cards.length)]); 
         const randomCard = getRandomCard(cards__easyMode, initialCards); 
         cards__easyMode.push(randomCard); 
       }
@@ -132,20 +174,6 @@ function App() {
     setPlayMode(true); 
   }
 
-  function handleAudioPlaying (e) {
-    e.preventDefault(); 
-     if(audioPlaying) {
-      mainTheme.pause(); 
-      setAudioPlaying(false)
-     }
-     else {
-      mainTheme.play()
-      .then(() => {
-        setAudioPlaying(true); 
-      }) 
-     }
-  };
-
   const starting = (
     <>
       <p>This is a starting page!</p>
@@ -172,19 +200,23 @@ function App() {
         </Box>
         {/* <ScoreBoard score={score} bestScore={bestScore}/> */}
       </Header>
-      <CardBoard>
-        {cards.map((card) => {
-          return <PlayingCard 
-            key={card.id}
-            card={card} 
-            onClick={handleClick}
-            isFlipped={isFlipped}
-          />
-        })}
-      </CardBoard>
-      <Footer onClick={handleAudioPlaying} audioPlaying={audioPlaying} helpPopup={helpPopupRef} screenWidth={screenWidth} screenHeight={screenHeight}/>
-      {/* <p>{currentRound}/{lastRound}</p> */}
-      <audio ref={flippingRef} >
+      <MainBody> 
+      <ScoreBoard score={score} bestScore={bestScore}/>
+        <CardBoard>
+          {cards.map((card) => {
+            return <PlayingCard 
+              key={card.id}
+              card={card} 
+              onClick={handleClick}
+              isFlipped={isFlipped}
+              screenWidth={screenWidth}
+            />
+          })}
+        </CardBoard>
+        <RoundDisplayer currentRound={currentRound} lastRound={lastRound}/>
+      </MainBody>
+      <Footer screenWidth={screenWidth} screenHeight={screenHeight} onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
+      <audio ref={flippingRef}>
         <source src="../src/sounds/flip.mp3"/>
       </audio>
     </Board>
@@ -192,29 +224,6 @@ function App() {
 
   return playMode ? playground : starting
 }
-
-function getRandomCard(arr, sourceArray) {
-  const randomCard = sourceArray[Math.floor(Math.random() * sourceArray.length)]; 
-  if(!arr.includes(randomCard)) {
-    return randomCard; 
-  } 
-  return getRandomCard(arr, sourceArray)
-}
-
-function getRandomizedCards(cards, clickedCards, initialCards) { 
-  const nonClickedCards = initialCards.filter((card) => {
-    const cardId = card.id; 
-    return !clickedCards.includes(cardId); 
-  }); 
-  const randomCard = getRandomCard(cards, nonClickedCards); 
-  const cardsCopy = [...cards]; 
-
-  // cardCopy.shift() - returns an element. that is why we call differently
-  cardsCopy.shift(); 
-  const randomizedCards = nonClickedCards.length === 0 ? cards : [...cardsCopy, randomCard]; 
-
-  return randomizedCards
-} 
 
 
 export default App
