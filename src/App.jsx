@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import {useEffect} from 'react';  
 import Box from '@mui/material/Box';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { HomePage } from './components/HomePage';
 import { Board } from './components/Board';
 import { Header } from './components/Header';
 import { initialCards } from './data/data';
@@ -21,6 +22,7 @@ import './styles/style.css';
 const maxCards__easyMode = 3; 
 const maxCards__mediumMode = 4; 
 const maxCards__hardMode = 5; 
+
 
 // const mainTheme = audioFactory("../src/sounds/main_theme.mp3")
 function App() {
@@ -41,6 +43,8 @@ function App() {
   const currentRound = clickedCards.length;
   const lastRound = cards.length + 3; 
 
+  console.log('the width of a screen: ' + screenWidth); 
+  console.log('the height of a screen: ' + screenHeight); 
   
   useEffect(() => {
     if(playMode) {
@@ -175,12 +179,7 @@ function App() {
   }
 
   const starting = (
-    <>
-      <p>This is a starting page!</p>
-      <button id="easyMode" onClick={startNewGame}>Easy</button>
-      <button id="mediumMode" onClick={startNewGame}>Medium</button>
-      <button id="hardMode" onClick={startNewGame}>Hard</button>
-    </>
+    <HomePage onClick={startNewGame} screenWidth={screenWidth} screenHeight={screenHeight}/>
   )
 
   const playground = (
@@ -189,19 +188,19 @@ function App() {
       <Header>
         <Box ref={returnRef} onClick={handleRestart} sx={{
           cursor: "pointer",
-          height: "42px", 
-          width: "46px",
+          height: "37px", 
+          width: "fit-content",
           border: "3px solid rgb(0, 0, 0)",
           borderRadius: "50%", 
           display: "flex", 
           justifyContent: "center", 
-          alignItems: "flex-start"}}>
+          alignItems: "flex-end"}}>
           <HomeOutlinedIcon fontSize="large"/>
         </Box>
         {/* <ScoreBoard score={score} bestScore={bestScore}/> */}
       </Header>
       <MainBody> 
-      <ScoreBoard score={score} bestScore={bestScore}/>
+        <ScoreBoard score={score} bestScore={bestScore}/>
         <CardBoard>
           {cards.map((card) => {
             return <PlayingCard 

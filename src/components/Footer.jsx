@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {useRef} from 'react';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import Box from '@mui/material/Box';
@@ -7,14 +8,18 @@ import Modal from '@mui/material/Modal';
 import { Button, useMediaQuery } from '@mui/material';
 import { theme } from '../styles/style';
 
+
 export const Footer = ({screenWidth, screenHeight, onClick, audioPlaying}) => {
+    const helpPopupRef = useRef(null); 
     const [popup, setPopup] = useState(null); 
     const open = Boolean(popup); 
-    const top = Math.floor(screenHeight / 1.5); 
+    const top = Math.floor(screenHeight / 1.4); 
     const left = Math.floor(screenWidth / 2.6); 
 
     function handleClick() {
         setPopup(true); 
+        helpPopupRef.current.volume = 0.7; 
+        helpPopupRef.current.play(); 
     }
 
     function handleClose() {
@@ -22,8 +27,8 @@ export const Footer = ({screenWidth, screenHeight, onClick, audioPlaying}) => {
     }
 
     return (
-        <Box className="footer" sx={{display: "flex", flexDirection: "column", width: "100%", height: "12%", background: "red"}}>
-            <Box sx={{background: "linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%)", width: "100%", height: "30%", position: "relative", top: "2%"}}></Box>
+        <Box className="footer" sx={{display: "flex", flexDirection: "column", width: "100%", height: "12%"}}>
+            <Box sx={{background: "linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%)", width: "100%", height: "38%", position: "relative", top: "2%"}}></Box>
             <Box sx={{background: "rgb(0, 0, 0)", width: "100%", height: "70%", display: "flex", justifyContent: "space-around", alignItems: "center", overflow: "hidden", paddingBlock: "5px"}}>
                 <Box>
                     <Button variant="contained" onClick={onClick} sx={{background: "#fff", borderRadius: "50px", maxWidth: '47px', maxHeight: '45px', minWidth: '47px', minHeight: '45px', display: "flex", alignItems: "flex-end"}} hover="">
@@ -67,6 +72,9 @@ export const Footer = ({screenWidth, screenHeight, onClick, audioPlaying}) => {
                     </Modal>
                 </Box>
             </Box>
+            <audio ref={helpPopupRef}>
+                <source src="../../src/sounds/help-popup.mp3"></source>
+            </audio>
         </Box>
     )
 }

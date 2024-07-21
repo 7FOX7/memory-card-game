@@ -1,13 +1,14 @@
 import { createTheme } from "@mui/material";
-import {red, blue} from "@mui/material/colors";
+import {red, blue, pink, orange} from "@mui/material/colors";
+import { makeStyles } from "@mui/material";
 
 export const theme = createTheme({
     breakpoints: {
         values: {
             mobile: 0,
-            tablet: 720, 
-            laptop: 1500, 
-            desktop: 1750
+            tablet: 700, 
+            laptop: 1320, 
+            desktop: 1650
         }
     }, 
     typography: {
@@ -27,6 +28,18 @@ export const theme = createTheme({
             main: blue[900], 
             secondary: red[700]
         }, 
+        bestScoreColor: {
+            main: red[800]
+        }, 
+        easyDifficultyButtonColor: {
+            main: pink[400]
+        }, 
+        mediumDifficultyButtonColor: {
+            main: orange[600]
+        }, 
+        hardDifficultyButtonColor: {
+            main: "rgb(80, 80, 80)"
+        }
     }, 
     shadows: {
         scoreBoardShadow: {

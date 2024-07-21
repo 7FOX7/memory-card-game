@@ -30,9 +30,9 @@ export const Header = ({children}) => {
     return (
         <>
             {isMobile && (
-                <AppBar position="static">
-                    <Toolbar sx={{background: "red"}}>
-                        <IconButton onClick={handleMenuButton}>
+                <AppBar position="static" elevation={0} color="transparent">
+                    <Toolbar>
+                        <IconButton onClick={handleMenuButton} sx={{color: "#fff"}}>
                             <MenuIcon />
                         </IconButton>
                         <Menu 
@@ -40,8 +40,8 @@ export const Header = ({children}) => {
                             anchorEl={anchorEl}
                             onClose={handleClose}
                             open={open}
-                        >
-                            <MenuItem onClick={handleClose}>
+                            MenuListProps={{sx: {padding: "2px"}}}>
+                            <MenuItem onClick={handleClose} sx={{padding: "7px"}}>
                                 {children}
                             </MenuItem>
                         </Menu>
