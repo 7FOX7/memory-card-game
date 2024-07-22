@@ -133,7 +133,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     Easy
                 </Box>
                 <Box sx={{
-                    backgroundImage: `url(../../src/assets/easy_difficulty.png)`, 
+                    backgroundImage: `url(../../public/easy_difficulty.png)`, 
                     backgroundSize: "100% 100%",
                     width: "35%", 
                     height: "100%" 
@@ -173,7 +173,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     Medium
                 </Box>
                 <Box sx={{
-                    backgroundImage: `url(../../src/assets/medium_difficulty.png)`, 
+                    backgroundImage: `url(../../public/medium_difficulty.png)`, 
                     backgroundSize: "100% 100%",
                     width: "35%", 
                     height: "100%" 
@@ -213,7 +213,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     Hard
                 </Box>
                 <Box sx={{
-                    backgroundImage: `url(../../src/assets/hard_difficulty.png)`, 
+                    backgroundImage: `url(../../public/hard_difficulty.png)`, 
                     backgroundSize: "100% 100%",
                     width: "35%", 
                     height: "100%" 
@@ -225,7 +225,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     height: "100%", 
                 }}>
                     <video autoPlay muted loop style={{width: "100%", height: "100%", objectFit: "fill"}}>
-                        <source src="../../src/assets/video_background.mp4" />
+                        <source src="../../public/video_background.mp4" />
                     </video>
                 </Box>
                 {text}

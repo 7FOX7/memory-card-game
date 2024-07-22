@@ -55,7 +55,7 @@ export const Footer = ({screenHeight, onClick, audioPlaying}) => {
                         </Box>
                         <Box sx={{position: "absolute", width: "100%", display: "flex"}}>
                             <Box sx={{background: "linear-gradient(to bottom right, rgb(209, 49, 28), rgb(14, 14, 116))", opacity: "0.65", zIndex: "1", width: "100%", borderTopLeftRadius: "30px", borderBottomLeftRadius: "8px", display: "flex"}}>
-                                <Box sx={{backgroundImage: "url(../../src/assets/help_popup_art.png)", backgroundSize: `260px 140px`, backgroundRepeat: "no-repeat", width: "220px", height: "140px", marginLeft: "auto"}}></Box>
+                                <Box sx={{backgroundImage: "url(../../public/help_popup_art.png)", backgroundSize: `260px 140px`, backgroundRepeat: "no-repeat", width: "220px", height: "140px", marginLeft: "auto"}}></Box>
                             </Box>
                         </Box>
                     </Box>

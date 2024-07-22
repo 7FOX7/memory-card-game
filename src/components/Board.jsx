@@ -13,7 +13,7 @@ export const Board = ({children, screenWidth, screenHeight}) => {
                 <Box sx={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundImage: `url(../../src/assets/main_background.gif)`,
+                    backgroundImage: `url(../../public/main_background.gif)`,
                     backgroundSize: `${updatedWidth}px ${screenHeight}px`, 
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 
@@ -26,7 +26,7 @@ export const Board = ({children, screenWidth, screenHeight}) => {
                 <Box sx={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundImage: `url(../../src/assets/main_background.gif)`,
+                    backgroundImage: `url(../../public/main_background.gif)`,
                     backgroundSize: `${screenWidth}px ${screenHeight}px`, 
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 

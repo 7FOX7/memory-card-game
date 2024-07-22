@@ -3,73 +3,73 @@ import { nanoid } from "nanoid"
 export const initialCards = [
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/kyo_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/kyo_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/ryo_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/ryo_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/mai_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/mai_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/andy_fighter.jpg",
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/andy_fighter.jpg",
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/elisabeth_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/elisabeth_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/kim_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/kim_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/king_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/king_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/shenwu_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/shenwu_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/terry_fighter.jpg",
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/terry_fighter.jpg",
+        characterImage_back: "../../public/card_back.jpg"
     }, 
     
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/duolon_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/duolon_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/goro_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/goro_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }, 
 
     {
         id: nanoid(8), 
-        characterImage_front: "../../src/assets/leona_fighter.jpg", 
-        characterImage_back: "../../src/assets/card_back.jpg"
+        characterImage_front: "../../public/leona_fighter.jpg", 
+        characterImage_back: "../../public/card_back.jpg"
     }
 ]
