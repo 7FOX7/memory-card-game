@@ -9,8 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { theme } from "../styles/style"; 
-import { useMediaQuery } from "@mui/material"; 
-
+import useMediaQuery from "@mui/material/useMediaQuery"; 
 
 export const Header = ({onClick, returnRef}) => {
     const [anchorEl, setAnchorEl] = useState(null); 

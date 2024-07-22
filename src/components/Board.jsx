@@ -1,6 +1,7 @@
-import Box from "@mui/material/Box"
-import { theme } from "../styles/style"
-import { useMediaQuery } from "@mui/material"
+import Box from "@mui/material/Box"; 
+import { theme } from "../styles/style"; 
+import useMediaQuery from "@mui/material/useMediaQuery"; 
+import { background } from "../data/data";
 
 export const Board = ({children, screenWidth, screenHeight}) => {
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
@@ -13,7 +14,7 @@ export const Board = ({children, screenWidth, screenHeight}) => {
                 <Box sx={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundImage: `url(../../public/main_background.gif)`,
+                    backgroundImage: `url(${background})`,
                     backgroundSize: `${updatedWidth}px ${screenHeight}px`, 
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 
@@ -26,7 +27,7 @@ export const Board = ({children, screenWidth, screenHeight}) => {
                 <Box sx={{
                     width: "100vw",
                     height: "100vh",
-                    backgroundImage: `url(../../public/main_background.gif)`,
+                    backgroundImage: `url(${background})`,
                     backgroundSize: `${screenWidth}px ${screenHeight}px`, 
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 

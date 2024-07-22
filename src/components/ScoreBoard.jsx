@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box"; 
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect } from "react"; 
 import { useState } from "react"; 
 import { theme } from "../styles/style";

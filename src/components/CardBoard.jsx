@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box"; 
 import { theme } from "../styles/style"; 
-import { useMediaQuery } from "@mui/material"; 
+import useMediaQuery from "@mui/material/useMediaQuery"; 
 
 export const CardBoard = ({children}) => {
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 

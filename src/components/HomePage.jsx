@@ -6,8 +6,10 @@ import { showTextAnimation, hideTextAnimation } from "../animations/animations";
 import { theme } from "../styles/style";
 import "../styles/style.css"; 
 import useMediaQuery from "@mui/material/useMediaQuery";
-import backgroundVideo from "../../public/video_background.mp4"; 
-
+import { background_video } from "../data/data";
+import { easy_difficulty } from "../data/data";
+import { medium_difficulty } from "../data/data";
+import { hard_difficulty } from "../data/data";
 
 export const HomePage = ({onClick, screenWidth, screenHeight}) => {
     const [hideText, setHideText] = useState(false); 
@@ -135,7 +137,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     Easy
                 </Box>
                 <Box sx={{
-                    backgroundImage: `url(../../public/easy_difficulty.png)`, 
+                    backgroundImage: `url(${easy_difficulty})`, 
                     backgroundSize: "100% 100%",
                     width: "35%", 
                     height: "100%" 
@@ -175,7 +177,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     Medium
                 </Box>
                 <Box sx={{
-                    backgroundImage: `url(../../public/medium_difficulty.png)`, 
+                    backgroundImage: `url(${medium_difficulty})`, 
                     backgroundSize: "100% 100%",
                     width: "35%", 
                     height: "100%" 
@@ -215,7 +217,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     Hard
                 </Box>
                 <Box sx={{
-                    backgroundImage: `url(../../public/hard_difficulty.png)`, 
+                    backgroundImage: `url(${hard_difficulty})`, 
                     backgroundSize: "100% 100%",
                     width: "35%", 
                     height: "100%" 
@@ -227,7 +229,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     height: "100%", 
                 }}>
                     <video autoPlay muted loop style={{width: "100%", height: "100%", objectFit: "fill"}}>
-                        <source src={backgroundVideo}/>
+                        <source src={background_video}/>
                     </video>
                 </Box>
                 {text}

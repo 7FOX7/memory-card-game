@@ -7,7 +7,8 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { theme } from '../styles/style';
-
+import {help_popup_sound} from '../data/data';
+import {help_popup_art} from '../data/data';
 
 export const Footer = ({screenHeight, onClick, audioPlaying}) => {
     const helpPopupRef = useRef(null); 
@@ -55,14 +56,14 @@ export const Footer = ({screenHeight, onClick, audioPlaying}) => {
                         </Box>
                         <Box sx={{position: "absolute", width: "100%", display: "flex"}}>
                             <Box sx={{background: "linear-gradient(to bottom right, rgb(209, 49, 28), rgb(14, 14, 116))", opacity: "0.65", zIndex: "1", width: "100%", borderTopLeftRadius: "30px", borderBottomLeftRadius: "8px", display: "flex"}}>
-                                <Box sx={{backgroundImage: "url(../../public/help_popup_art.png)", backgroundSize: `260px 140px`, backgroundRepeat: "no-repeat", width: "220px", height: "140px", marginLeft: "auto"}}></Box>
+                                <Box sx={{backgroundImage: `url(${help_popup_art})`, backgroundSize: `260px 140px`, backgroundRepeat: "no-repeat", width: "220px", height: "140px", marginLeft: "auto"}}></Box>
                             </Box>
                         </Box>
                     </Box>
                 </Box>
             </Modal>
             <audio ref={helpPopupRef}>
-                <source src="../../src/sounds/help-popup.mp3"></source>
+                <source src={help_popup_sound}></source>
             </audio>
         </Box>
     )

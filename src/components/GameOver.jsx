@@ -1,8 +1,10 @@
 import Box from "@mui/material/Box"; 
 import Button from "@mui/material/Button"; 
 import Modal from "@mui/material/Modal";
-import { useMediaQuery } from "@mui/material"; 
+import useMediaQuery from "@mui/material/useMediaQuery"; 
 import { theme } from "../styles/style"; 
+import {win_background} from "../data/data";
+import {lose_background} from "../data/data";
 
 export const GameOver = ({endGame, gameIsLost, onClick}) => {
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
@@ -17,7 +19,7 @@ export const GameOver = ({endGame, gameIsLost, onClick}) => {
             paddingInline: "25px", 
             position: "absolute", 
             backgroundSize: "100% 100%", 
-            backgroundImage: "url(../../public/win_background.png)", 
+            backgroundImage: `url(${win_background})`, 
             backgroundRepeat: "no-repeat", 
             backgroundPosition: "center", 
             display: "flex", 
@@ -62,7 +64,7 @@ export const GameOver = ({endGame, gameIsLost, onClick}) => {
             paddingInline: "25px", 
             position: "absolute", 
             backgroundSize: "100% 100%", 
-            backgroundImage: "url(../../public/lose_background.png)", 
+            backgroundImage: `url(${lose_background})`, 
             backgroundPosition: "center", 
             backgroundRepeat: "no-repeat",  
             display: "flex", 
@@ -109,7 +111,7 @@ export const GameOver = ({endGame, gameIsLost, onClick}) => {
             paddingInline: "25px", 
             position: "absolute", 
             backgroundSize: "100% 100%", 
-            backgroundImage: "url(../../public/win_background.png)", 
+            backgroundImage: `url(${win_background})`, 
             backgroundRepeat: "no-repeat", 
             backgroundPosition: "center", 
             display: "flex", 
@@ -154,7 +156,7 @@ export const GameOver = ({endGame, gameIsLost, onClick}) => {
             paddingInline: "25px", 
             position: "absolute", 
             backgroundSize: "100% 100%", 
-            backgroundImage: "url(../../public/lose_background.png)", 
+            backgroundImage: `url(${lose_background})`, 
             backgroundPosition: "center", 
             backgroundRepeat: "no-repeat",  
             display: "flex", 
@@ -201,7 +203,7 @@ const tablet__window__winning = (
         paddingInline: "25px", 
         position: "absolute", 
         backgroundSize: "100% 100%", 
-        backgroundImage: "url(../../public/win_background.png)", 
+        backgroundImage: `url(${win_background})`, 
         backgroundRepeat: "no-repeat", 
         backgroundPosition: "center", 
         display: "flex", 
@@ -246,7 +248,7 @@ const tablet__window__losing = (
         paddingInline: "25px", 
         position: "absolute", 
         backgroundSize: "100% 100%", 
-        backgroundImage: "url(../../public/lose_background.png)", 
+        backgroundImage: `url(${lose_background})`, 
         backgroundPosition: "center", 
         backgroundRepeat: "no-repeat",   
         display: "flex", 
@@ -293,7 +295,7 @@ const desktop__window__winning = (
         paddingInline: "25px", 
         position: "absolute", 
         backgroundSize: "100% 100%", 
-        backgroundImage: "url(../../public/win_background.png)", 
+        backgroundImage: `url(${win_background})`, 
         backgroundRepeat: "no-repeat", 
         backgroundPosition: "center", 
         display: "flex", 
@@ -338,7 +340,7 @@ const desktop__window__losing = (
         paddingInline: "25px", 
         position: "absolute", 
         backgroundSize: "100% 100%", 
-        backgroundImage: "url(../../public/lose_background.png)", 
+        backgroundImage: `url(${lose_background})`, 
         backgroundPosition: "center", 
         backgroundRepeat: "no-repeat",  
         display: "flex", 

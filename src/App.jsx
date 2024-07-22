@@ -4,7 +4,9 @@ import {useEffect} from 'react';
 import { HomePage } from './components/HomePage';
 import { Board } from './components/Board';
 import { Header } from './components/Header';
-import { initialCards } from './data/data';
+import {initialCards} from './data/data';
+import {main_theme} from "./data/data"; 
+import {flip_sound} from "./data/data";
 import { GameOver } from './components/GameOver';
 import { ScoreBoard } from './components/ScoreBoard';
 import { MainBody } from './components/MainBody';
@@ -15,7 +17,7 @@ import { RoundDisplayer } from './components/RoundDisplayer';
 import audioFactory from './functionality/audioFactory';
 import shuffle from './functionality/shuffle';
 import getRandomCard from './functionality/getRandomCard';
-import './styles/style.css'; 
+import './styles/style.css';  
 
 const maxCards__easyMode = 3; 
 const maxCards__mediumMode = 4; 
@@ -41,7 +43,7 @@ function App() {
   
   useEffect(() => {
     if(playMode) {
-      const mainThemeInstance = audioFactory("../src/sounds/main_theme.mp3"); 
+      const mainThemeInstance = audioFactory(main_theme); 
       setAudioPlaying(true); 
       mainThemeInstance.play(); 
       setMainTheme(mainThemeInstance)
@@ -196,7 +198,7 @@ function App() {
       </MainBody>
       <Footer screenHeight={screenHeight} onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
       <audio ref={flippingRef}>
-        <source src="../src/sounds/flip.mp3"/>
+        <source src={flip_sound}/>
       </audio>
     </Board>
   )   
