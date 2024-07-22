@@ -1,4 +1,3 @@
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -12,7 +11,7 @@ export const RoundDisplayer = ({currentRound, lastRound}) => {
                 <Typography sx={{
                     color: theme.palette.roundColor.secondary, 
                     fontFamily: theme.typography.font3.fontFamily, 
-                    fontSize: `${isMobile ? "2.7rem" : "3rem"}`}}
+                    fontSize: `${isMobile ? "2.4rem" : "3rem"}`}}
                 >
                     {currentRound}/{lastRound}
                 </Typography>     

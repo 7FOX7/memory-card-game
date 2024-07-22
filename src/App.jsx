@@ -1,8 +1,6 @@
 import { useState } from 'react'; 
 import { useRef } from 'react'; 
 import {useEffect} from 'react';  
-import Box from '@mui/material/Box';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { HomePage } from './components/HomePage';
 import { Board } from './components/Board';
 import { Header } from './components/Header';
@@ -23,8 +21,6 @@ const maxCards__easyMode = 3;
 const maxCards__mediumMode = 4; 
 const maxCards__hardMode = 5; 
 
-
-// const mainTheme = audioFactory("../src/sounds/main_theme.mp3")
 function App() {
   const returnRef = useRef(null);
   const flippingRef = useRef(null);
@@ -42,9 +38,6 @@ function App() {
   const [gameIsLost, setGameIsLost] = useState(false);   
   const currentRound = clickedCards.length;
   const lastRound = cards.length + 3; 
-
-  console.log('the width of a screen: ' + screenWidth); 
-  console.log('the height of a screen: ' + screenHeight); 
   
   useEffect(() => {
     if(playMode) {
@@ -74,10 +67,10 @@ function App() {
       const updatedCards = getRandomizedCards(cards, clickedCards, initialCards); 
       setTimeout(() => {
         setCards(updatedCards);
-      }, 1000) 
+      }, 1400) 
       setTimeout(() => {
         setIsFlipped(false)
-      }, 1500)
+      }, 1800)
     } 
   }, [score])
 
@@ -87,7 +80,6 @@ function App() {
       return clickedCard === e.currentTarget.id; 
     })
 
-    // const clickedCardsCopy = [...clickedCards]; 
     if(typeof(wasAlreadyClicked) !== "undefined") {
       setGameShouldEnd(true); 
       setGameIsLost(true)
@@ -185,19 +177,7 @@ function App() {
   const playground = (
     <Board screenWidth={screenWidth} screenHeight={screenHeight}>
       <GameOver endGame={gameShouldEnd} gameIsLost={gameIsLost} onClick={handleRestart}/>
-      <Header>
-        <Box ref={returnRef} onClick={handleRestart} sx={{
-          cursor: "pointer",
-          height: "37px", 
-          width: "fit-content",
-          border: "3px solid rgb(0, 0, 0)",
-          borderRadius: "50%", 
-          display: "flex", 
-          justifyContent: "center", 
-          alignItems: "flex-end"}}>
-          <HomeOutlinedIcon fontSize="large"/>
-        </Box>
-      </Header>
+      <Header onClick={handleRestart} returnRef={returnRef} />
       <MainBody> 
         <ScoreBoard score={score} bestScore={bestScore} screenWidth={screenWidth}/>
         <CardBoard>
@@ -222,6 +202,5 @@ function App() {
 
   return playMode ? playground : starting
 }
-
 
 export default App

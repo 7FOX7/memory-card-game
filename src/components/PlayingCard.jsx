@@ -1,14 +1,13 @@
-import CardContent from "@mui/material/CardContent";
-import Box from "@mui/material/Box"; 
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import ReactCardFlip from "react-card-flip"; 
-
+import { theme } from "../styles/style";
 
 export const PlayingCard = ({onClick, card, isFlipped, screenWidth}) => {
-    const cardWidth = Math.floor((screenWidth / 4.5) + 15); 
-    const cardHeight = Math.floor((screenWidth / 4) + 65);  
+    const smallScreen = useMediaQuery(theme.breakpoints.down('laptop')); 
+    const cardWidth = smallScreen ? Math.floor((screenWidth / 4.5) + 15) : Math.floor((screenWidth / 6.5)); 
+    const cardHeight = smallScreen ? Math.floor((screenWidth / 4) + 65) : Math.floor((screenWidth / 5) + 15);  
 
-    console.log('card width: ' + cardWidth); 
     return (
         <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedFrontToBack="1.5" flipSpeedBackToFront="1.5" containerStyle={{
             width: "fit-content",
@@ -19,7 +18,8 @@ export const PlayingCard = ({onClick, card, isFlipped, screenWidth}) => {
                 height: `${cardHeight}px`, 
                 backgroundImage: `url(${card.characterImage_front})`, 
                 backgroundSize: `${cardWidth}px ${cardHeight}px`,
-                boxShadow: "0px 0px 3px 2px rgb(0, 0, 0)" 
+                boxShadow: `${smallScreen ? "0px 0px 3px 2px rgb(0, 0, 0)" : "0px 0px 6px 4px rgb(0, 0, 0)"}`, 
+                cursor: "pointer"
             }}>
             </Card> 
             <Card sx={{

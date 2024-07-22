@@ -8,7 +8,6 @@ export const CardBoard = ({children}) => {
     const isLaptop = useMediaQuery(theme.breakpoints.between('laptop', 'desktop'));
     const isDesktop = useMediaQuery(theme.breakpoints.up('desktop')); 
 
-
     return (
         <>  
             {isMobile && (
@@ -47,14 +46,17 @@ export const CardBoard = ({children}) => {
                 </Box>
             )}
 
-            {isLaptop && (
-                <Box >
-                    {children}
-                </Box>
-            )}
-
-            {isDesktop && (
-                <Box >
+            {(isLaptop || isDesktop) && (
+                <Box sx={{
+                    display: "flex", 
+                    height: "75%", 
+                    justifyContent: "space-around", 
+                    alignItems: "center", 
+                    overflowX: "hidden", 
+                    fontFamily: theme.typography.cardBoard_typography, 
+                    width: "80%", 
+                    paddingBlock: "5px", 
+                }}>
                     {children}
                 </Box>
             )}

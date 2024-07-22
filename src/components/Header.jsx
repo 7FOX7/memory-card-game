@@ -6,11 +6,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import { theme } from "../styles/style"; 
 import { useMediaQuery } from "@mui/material"; 
 
 
-export const Header = ({children}) => {
+export const Header = ({onClick, returnRef}) => {
     const [anchorEl, setAnchorEl] = useState(null); 
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
     const isTablet = useMediaQuery(theme.breakpoints.between('tablet', 'laptop')); 
@@ -40,9 +42,27 @@ export const Header = ({children}) => {
                             anchorEl={anchorEl}
                             onClose={handleClose}
                             open={open}
-                            MenuListProps={{sx: {padding: "2px"}}}>
+                            MenuListProps={{sx: {padding: "2px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}}>
                             <MenuItem onClick={handleClose} sx={{padding: "7px"}}>
-                                {children}
+                            <Box ref={returnRef} onClick={onClick} sx={{
+                                cursor: "pointer",
+                                height: "37px", 
+                                width: "fit-content",
+                                border: "3px solid rgb(0, 0, 0)",
+                                borderRadius: "50%", 
+                                display: "flex", 
+                                justifyContent: "center", 
+                                alignItems: "flex-end", 
+                                }}>
+                                <HomeOutlinedIcon fontSize="large"/>
+                            </Box>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose} sx={{padding: "7px"}}>
+                            <Box>
+                            <a href="https://github.com/7FOX7">
+                                <GitHubIcon fontSize="large" sx={{color: "black"}}/>
+                            </a>
+                            </Box>
                             </MenuItem>
                         </Menu>
                     </Toolbar>
@@ -60,35 +80,56 @@ export const Header = ({children}) => {
                             anchorEl={anchorEl}
                             onClose={handleClose}
                             open={open}
-                            MenuListProps={{sx: {padding: "2px"}}}>
+                            MenuListProps={{sx: {padding: "2px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}}>
                             <MenuItem onClick={handleClose} sx={{padding: "7px"}}>
-                                {children}
+                            <Box ref={returnRef} onClick={onClick} sx={{
+                                cursor: "pointer",
+                                height: "37px", 
+                                width: "fit-content",
+                                border: "3px solid rgb(0, 0, 0)",
+                                borderRadius: "50%", 
+                                display: "flex", 
+                                justifyContent: "center", 
+                                alignItems: "flex-end", 
+                                }}>
+                                <HomeOutlinedIcon fontSize="large"/>
+                            </Box>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose} sx={{padding: "7px"}}>
+                            <Box>
+                            <a href="https://github.com/7FOX7">
+                                <GitHubIcon fontSize="large" sx={{color: "black"}}/>
+                            </a>
+                            </Box>
                             </MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
             )}
 
-            {isLaptop && (
-                <Box component="header" sx={{
-                    background: "blue", 
-                    display: "flex", 
-                    justifyContent: "space-between", 
-                    marginBottom: "10px"
-                }}>
-                    {children}
-                </Box>
-            )}
-
-            {isDesktop && (
-                <Box component="header" sx={{
-                    background: "blue", 
-                    display: "flex", 
-                    justifyContent: "space-between",
-                    marginBottom: "10px"
-                }}>
-                    {children}
-                </Box>
+            {(isLaptop || isDesktop) && (
+                 <AppBar position="static" sx={{background: "#c70000"}}>
+                    <Toolbar>
+                        <Box ref={returnRef} onClick={onClick} sx={{
+                            cursor: "pointer",
+                            height: "37px", 
+                            width: "fit-content",
+                            border: "3px solid rgb(0, 0, 0)",
+                            borderRadius: "50%", 
+                            display: "flex", 
+                            justifyContent: "center", 
+                            alignItems: "center", 
+                            background: "#fff"
+                            }}>
+                            <HomeOutlinedIcon fontSize="large" sx={{color: "rgb(0, 0, 0)"}}/>
+                        </Box>   
+                        <Box sx={{marginLeft: "20px"}}>
+                            <a href="https://github.com/7FOX7">
+                                <GitHubIcon fontSize="large" sx={{color: "black"}}/>
+                            </a>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
             )}
         </>
     )

@@ -5,21 +5,19 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import Box from '@mui/material/Box';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Modal from '@mui/material/Modal';
-import { Button, useMediaQuery } from '@mui/material';
+import Button from '@mui/material/Button';
 import { theme } from '../styles/style';
 
 
 export const Footer = ({screenHeight, onClick, audioPlaying}) => {
-    const isMobile = useMediaQuery(theme.breakpoints.down('tablet')); 
     const helpPopupRef = useRef(null); 
     const [popup, setPopup] = useState(null); 
     const open = Boolean(popup); 
-    const top_mobile = Math.floor(screenHeight / 1.4); 
-    const top_otherDevices = Math.floor(screenHeight / 1.28); 
+    const top = Math.floor(screenHeight / 1.34); 
 
     function handleClick() {
         setPopup(true); 
-        helpPopupRef.current.volume = 0.7; 
+        helpPopupRef.current.volume = 0.5; 
         helpPopupRef.current.play(); 
     }
 
@@ -44,49 +42,24 @@ export const Footer = ({screenHeight, onClick, audioPlaying}) => {
                             <QuestionMarkIcon sx={{fill: "rgb(0, 0, 0)"}}/>
                         </Box>
                     </Button>
-                    {/* <Menu 
-                        id="footer-menu" 
-                        open={open} 
-                        anchorEl={anchorEl} 
-                        onClose={handleClose}
-                        sx={{left: "5%"}}
-                        MenuListProps={{sx: {padding: 0}}}
-                    >   
-                    <MenuItem onClick={handleClose} sx={{padding: 0}}>
-                        <Box sx={{background: "linear-gradient(to bottom right, rgb(209, 49, 28), rgb(14, 14, 116))", opacity: 0.6}}>
-                            <Box sx={{backgroundImage: "url(../../src/assets/help_popup_art.png)", backgroundSize: "300px 140px", backgroundRepeat: "no-repeat", width: "290px", height: "140px"}}></Box>
-                        </Box>
-                    </MenuItem>
-                    </Menu> */}
                 </Box>
             </Box>
             <Modal open={open} onClose={handleClose}>
-                    {/* <Box>
-                        <Box sx={{position: "absolute", paddingBlock: "15px", left: "30px", top: `${top}px`, zIndex: "1", width: "50%", height: "fit-content", overflow: "hidden", textWrap: "wrap", color: "#fff", fontSize: "1em", fontFamily: `${theme.typography.font1.fontFamily}`}}>
+                <Box sx={{display: "flex", width: "100%", height: "100%"}} onClick={handleClose}>
+                    <Box sx={{position: "relative", top: `${top}px`, display: "flex", width: "550px", justifyContent: "space-between", marginLeft: "auto"}}>
+                        <Box sx={{paddingInline: "15px", paddingBlock: "20px", zIndex: "2", width: "220px", height: "fit-content", overflow: "hidden", textWrap: "wrap", color: "#fff", fontSize: "1em", fontFamily: `${theme.typography.font1.fontFamily}`}}>
                             <span>
                             The rules are simple: do not click on the same card twice. 
                             Try to get the highest possible score. Good luck!
                             </span>
                         </Box>
-                        <Box sx={{background: "linear-gradient(to bottom right, rgb(209, 49, 28), rgb(14, 14, 116))", position: "relative", top: `${top}px`, opacity: 0.75}}>
-                            <Box sx={{position: "relative", backgroundImage: "url(../../src/assets/help_popup_art.png)", backgroundSize: `300px 150px`, backgroundRepeat: "no-repeat", width: "290px", height: "140px", left: `${left}px`}}></Box>
-                        </Box>
-                    </Box> */}
-                    <Box sx={{display: "flex", width: "100%", height: "100%"}} onClick={handleClose}>
-                        <Box sx={{position: "relative", top: `${isMobile ? top_mobile : top_otherDevices}px`, display: "flex", width: "550px", justifyContent: "space-between", marginLeft: "auto"}}>
-                            <Box sx={{paddingInline: "15px", paddingBlock: "20px", zIndex: "2", width: "220px", height: "fit-content", overflow: "hidden", textWrap: "wrap", color: "#fff", fontSize: "1em", fontFamily: `${theme.typography.font1.fontFamily}`}}>
-                                <span>
-                                The rules are simple: do not click on the same card twice. 
-                                Try to get the highest possible score. Good luck!
-                                </span>
-                            </Box>
-                            <Box sx={{position: "absolute", width: "100%", display: "flex"}}>
-                                <Box sx={{background: "linear-gradient(to bottom right, rgb(209, 49, 28), rgb(14, 14, 116))", opacity: "0.65", zIndex: "1", width: "100%", borderTopLeftRadius: "30px", borderBottomLeftRadius: "8px", display: "flex"}}>
-                                    <Box sx={{backgroundImage: "url(../../src/assets/help_popup_art.png)", backgroundSize: `260px 140px`, backgroundRepeat: "no-repeat", width: "220px", height: "140px", marginLeft: "auto"}}></Box>
-                                </Box>
+                        <Box sx={{position: "absolute", width: "100%", display: "flex"}}>
+                            <Box sx={{background: "linear-gradient(to bottom right, rgb(209, 49, 28), rgb(14, 14, 116))", opacity: "0.65", zIndex: "1", width: "100%", borderTopLeftRadius: "30px", borderBottomLeftRadius: "8px", display: "flex"}}>
+                                <Box sx={{backgroundImage: "url(../../src/assets/help_popup_art.png)", backgroundSize: `260px 140px`, backgroundRepeat: "no-repeat", width: "220px", height: "140px", marginLeft: "auto"}}></Box>
                             </Box>
                         </Box>
                     </Box>
+                </Box>
             </Modal>
             <audio ref={helpPopupRef}>
                 <source src="../../src/sounds/help-popup.mp3"></source>
