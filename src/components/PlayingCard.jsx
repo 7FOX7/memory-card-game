@@ -5,8 +5,8 @@ import ReactCardFlip from "react-card-flip";
 
 
 export const PlayingCard = ({onClick, card, isFlipped, screenWidth}) => {
-    const cardWidth = Math.floor((screenWidth / 3) + 15); 
-    const cardHeight = Math.floor((screenWidth / 3) + 65);  
+    const cardWidth = Math.floor((screenWidth / 4.5) + 15); 
+    const cardHeight = Math.floor((screenWidth / 4) + 65);  
 
     console.log('card width: ' + cardWidth); 
     return (

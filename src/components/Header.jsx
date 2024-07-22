@@ -50,13 +50,23 @@ export const Header = ({children}) => {
             )}
             
             {isTablet && (
-                <Box component="header" sx={{
-                    background: "blue", 
-                    display: "flex", 
-                    justifyContent: "space-between", 
-                }}>
-                    {children}
-                </Box>
+                 <AppBar position="static" sx={{background: "#c70000"}}>
+                    <Toolbar>
+                        <IconButton onClick={handleMenuButton} sx={{color: "#fff"}}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu 
+                            id="header-menu"
+                            anchorEl={anchorEl}
+                            onClose={handleClose}
+                            open={open}
+                            MenuListProps={{sx: {padding: "2px"}}}>
+                            <MenuItem onClick={handleClose} sx={{padding: "7px"}}>
+                                {children}
+                            </MenuItem>
+                        </Menu>
+                    </Toolbar>
+                </AppBar>
             )}
 
             {isLaptop && (

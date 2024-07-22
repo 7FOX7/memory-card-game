@@ -1,15 +1,34 @@
 import Box from "@mui/material/Box"; 
 import { useMediaQuery } from "@mui/material";
+import { useEffect } from "react"; 
+import { useState } from "react"; 
 import { theme } from "../styles/style";
 import { useMemo } from "react";
 import { nanoid } from "nanoid";
 import { scoreAnimation, bestScoreAnimation } from "../animations/animations";
 
-export const ScoreBoard = ({score, bestScore}) => {
+export const ScoreBoard = ({score, bestScore, screenWidth}) => { 
+    const [containerWidth, setContainerWidth] = useState(null); 
+    const [fontSize, setFontSize] = useState(null); 
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
     const isTablet = useMediaQuery(theme.breakpoints.between('tablet', 'laptop')); 
     const isLaptop = useMediaQuery(theme.breakpoints.between('laptop', 'desktop'));
     const isDesktop = useMediaQuery(theme.breakpoints.up('desktop')); 
+
+    useEffect(() => {
+        if(isMobile) {
+            setContainerWidth("55%"); 
+            setFontSize("1.15rem"); 
+        }   
+        else if(isTablet) {
+            setContainerWidth("30%"); 
+            setFontSize("1.4rem"); 
+        }
+        else if(isLaptop || isDesktop) {
+            setContainerWidth("16%"); 
+            setFontSize("1.15rem"); 
+        }
+    }, [screenWidth])
 
     const scoreAnimated = 
         <Box sx={{
@@ -27,9 +46,29 @@ export const ScoreBoard = ({score, bestScore}) => {
             {bestScore}
         </Box>
 
-    const scoreBoard = useMemo(() => {
-        return <Box key={nanoid(5)} sx={{
-            width: "60%", 
+    const scores = useMemo(() => {
+        return (
+            <>
+                <Box key={nanoid(6)} sx={{display: "flex", alignItems: "center", color: "#fff"}}>
+                    <Box sx={{marginRight: "auto"}}>
+                        Current score:
+                    </Box> 
+                    {scoreAnimated}
+                </Box>
+
+                <Box key={nanoid(6)} sx={{display: "flex", alignItems: "center", color: `${theme.palette.bestScoreColor.main}`}}>
+                    <Box sx={{marginRight: "auto"}}>
+                        Best score: 
+                    </Box>
+                    {bestScoreAnimated}
+                </Box>
+            </>
+        )
+    }, [score])
+
+    const scoreBoard = (
+        <Box sx={{
+            width: containerWidth, 
             paddingBlock: "15px", 
             paddingInline: "18px", 
             display: "flex", 
@@ -37,83 +76,18 @@ export const ScoreBoard = ({score, bestScore}) => {
             background: "black",
             boxShadow: theme.shadows.scoreBoardShadow.main, 
             borderRadius: "15px", 
-            fontSize: "1.15em", 
+            fontSize: fontSize, 
             fontWeight: "600", 
             fontFamily: theme.typography.font1, 
+
         }}>
-            <Box sx={{display: "flex", alignItems: "center", color: "#fff"}}>
-                <Box sx={{marginRight: "auto"}}>
-                    Current score:
-                </Box> 
-                {scoreAnimated}
-            </Box>
-
-            <Box sx={{display: "flex", alignItems: "center", color: `${theme.palette.bestScoreColor.main}`}}>
-                <Box sx={{marginRight: "auto"}}>
-                    Best score: 
-                </Box>
-                {bestScoreAnimated}
-            </Box>
+            {scores}
         </Box>
-    }, [score])
-
+    )
+        
     return (
         <>
-            {isMobile && scoreBoard}
-
-            {isTablet && (
-                <Box sx={{
-                    padding: "20px", 
-                    display: "flex", 
-                    flexDirection: "column", 
-                    background: "green",
-                    boxShadow: theme.shadows.scoreBoardShadow.main, 
-                    borderRadius: "15px", 
-                    fontSize: "1.35em", 
-                    fontWeight: "600", 
-                    fontFamily: theme.typography.font1, 
-                    color: "#fff"
-                }}>
-                    <span>your score is: {score}</span>
-                    <span>your best score is: {bestScore}</span>
-                </Box>
-            )}
-
-            {isLaptop && (
-                <Box sx={{
-                    padding: "20px", 
-                    display: "flex", 
-                    flexDirection: "column", 
-                    background: "green",
-                    boxShadow: theme.shadows.scoreBoardShadow.main, 
-                    borderRadius: "15px", 
-                    fontSize: "1.65em", 
-                    fontWeight: "600", 
-                    fontFamily: theme.typography.font1, 
-                    color: "#fff"
-                }}>
-                    <span>your score is: {score}</span>
-                    <span>your best score is: {bestScore}</span>
-                </Box>
-            )}
-
-            {isDesktop && (
-                <Box sx={{
-                    padding: "20px", 
-                    display: "flex", 
-                    flexDirection: "column", 
-                    background: "green",
-                    boxShadow: theme.shadows.scoreBoardShadow.main, 
-                    borderRadius: "25px", 
-                    fontSize: "1.85em", 
-                    fontWeight: "600", 
-                    fontFamily: theme.typography.font1, 
-                    color: "#fff"
-                }}>
-                    <span>your score is: {score}</span>
-                    <span>your best score is: {bestScore}</span>
-                </Box>
-            )}
+           {scoreBoard}
         </>
     )      
 } 

@@ -1,13 +1,13 @@
+
 import { createTheme } from "@mui/material";
 import {red, blue, pink, orange} from "@mui/material/colors";
-import { makeStyles } from "@mui/material";
 
 export const theme = createTheme({
     breakpoints: {
         values: {
             mobile: 0,
             tablet: 700, 
-            laptop: 1320, 
+            laptop: 1330, 
             desktop: 1650
         }
     }, 
@@ -20,7 +20,6 @@ export const theme = createTheme({
         }, 
         font3: {
             fontFamily: "'Jaini'", 
-            fontSize: "2.7em"
         }
     }, 
     palette: {

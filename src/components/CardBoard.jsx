@@ -12,25 +12,37 @@ export const CardBoard = ({children}) => {
     return (
         <>  
             {isMobile && (
-            <Box sx={{
-                display: "grid", 
-                height: "70%", 
-                justifyItems: "center", 
-                alignItems: "center", 
-                overflowY: "scroll", 
-                overflowX: "hidden", 
-                fontFamily: theme.typography.cardBoard_typography, 
-                width: "100%", 
-                gridTemplateColumns: "auto auto", 
-                paddingBlock: "5px", 
-                rowGap: "8px"
-            }}>
-                {children}
-            </Box>
+                <Box sx={{
+                    display: "grid", 
+                    height: "70%", 
+                    justifyItems: "center", 
+                    alignItems: "center", 
+                    overflowY: "scroll", 
+                    overflowX: "hidden", 
+                    fontFamily: theme.typography.cardBoard_typography, 
+                    width: "90%", 
+                    gridTemplateColumns: "auto auto", 
+                    paddingBlock: "5px", 
+                    rowGap: "8px"
+                }}>
+                    {children}
+                </Box>
             )}
 
             {isTablet && (
-                <Box >
+                <Box sx={{
+                    display: "grid", 
+                    height: "75%", 
+                    justifyItems: "center", 
+                    alignItems: "center", 
+                    overflowY: "scroll", 
+                    overflowX: "hidden", 
+                    fontFamily: theme.typography.cardBoard_typography, 
+                    width: "70%", 
+                    gridTemplateColumns: "auto auto", 
+                    paddingBlock: "5px", 
+                    rowGap: "8px"
+                }}>
                     {children}
                 </Box>
             )}

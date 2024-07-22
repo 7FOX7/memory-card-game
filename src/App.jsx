@@ -197,10 +197,9 @@ function App() {
           alignItems: "flex-end"}}>
           <HomeOutlinedIcon fontSize="large"/>
         </Box>
-        {/* <ScoreBoard score={score} bestScore={bestScore}/> */}
       </Header>
       <MainBody> 
-        <ScoreBoard score={score} bestScore={bestScore}/>
+        <ScoreBoard score={score} bestScore={bestScore} screenWidth={screenWidth}/>
         <CardBoard>
           {cards.map((card) => {
             return <PlayingCard 
@@ -214,7 +213,7 @@ function App() {
         </CardBoard>
         <RoundDisplayer currentRound={currentRound} lastRound={lastRound}/>
       </MainBody>
-      <Footer screenWidth={screenWidth} screenHeight={screenHeight} onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
+      <Footer screenHeight={screenHeight} onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
       <audio ref={flippingRef}>
         <source src="../src/sounds/flip.mp3"/>
       </audio>

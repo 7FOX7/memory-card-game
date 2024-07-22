@@ -14,7 +14,8 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
     const [containerHeight, setContainerHeight] = useState(null);  
     const [containerLeftDirection, setContainerLeftDirection] = useState(null); 
     const [buttonWidth, setButtonWidth] = useState(null); 
-    const [textLeftDirection, setTextLeftDirection] = useState(null); 
+    const [buttonFontSize, setButtonFontSize] = useState(null); 
+    const [textLeftDirection, setTextLeftDirection] = useState(null);
 
     const isMobile = useMediaQuery(theme.breakpoints.between('mobile', 'tablet')); 
     const isTablet = useMediaQuery(theme.breakpoints.between('tablet', 'laptop'));
@@ -28,6 +29,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
             setContainerHeight('45%'); 
             setContainerLeftDirection('-25%'); 
             setButtonWidth('80%'); 
+            setButtonFontSize('1.3rem'); 
             setTextLeftDirection('20%'); 
         }
         else if(isTablet) {
@@ -36,6 +38,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
             setContainerHeight('42%'); 
             setContainerLeftDirection('-10%'); 
             setButtonWidth('50%'); 
+            setButtonFontSize('1.5rem'); 
             setTextLeftDirection('30%'); 
         }
         else if(isLaptop) {
@@ -44,6 +47,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
             setContainerHeight('50%'); 
             setContainerLeftDirection('15%'); 
             setButtonWidth('50%'); 
+            setButtonFontSize('1.5rem'); 
             setTextLeftDirection('50%'); 
         }
         else if(isDesktop) {
@@ -52,6 +56,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
             setContainerHeight('50%'); 
             setContainerLeftDirection('20%'); 
             setButtonWidth('40%'); 
+            setButtonFontSize('1.5rem'); 
             setTextLeftDirection('55%'); 
         }
     }, [screenWidth, screenHeight])
@@ -116,13 +121,13 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                 transition: "0.1s", 
                 ':hover': {
                     filter: "brightness(50%)", 
-                    transform: "scale(1.1)" 
+                    transform: "scale(1.1)", 
                 }
             }}>
                 <Box sx={{
                     marginLeft: "25%", 
                     color: "#fff", 
-                    fontSize: "1.7em", 
+                    fontSize: buttonFontSize, 
                     fontWeight: "600", 
                 }}>
                     Easy
@@ -162,7 +167,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                    marginLeft: "16%",
                    marginRight: "2%",  
                    color: "#fff", 
-                   fontSize: "1.7em", 
+                   fontSize: buttonFontSize, 
                    fontWeight: "600", 
                 }}>
                     Medium
@@ -202,7 +207,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     marginLeft: "25%", 
                     marginRight: "3%", 
                     color: "#fff", 
-                    fontSize: "1.7em", 
+                    fontSize: buttonFontSize, 
                     fontWeight: "600", 
                 }}>
                     Hard

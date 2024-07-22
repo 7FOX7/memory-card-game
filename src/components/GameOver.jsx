@@ -194,7 +194,7 @@ const tablet__window__winning = (
         backgroundRepeat: "no-repeat", 
         backgroundPosition: "center", 
         display: "flex", 
-        left: 0, 
+        left: "8%", 
         top: "50%",
         transform: "translate(9%, -50%)",  
         zIndex: 5, 
@@ -202,16 +202,16 @@ const tablet__window__winning = (
         fontSize: "2em", 
         flexDirection: "column", 
         justifyContent: "space-around", 
-        width: "85%", 
-        height: "40%", 
+        width: "70%", 
+        height: "35%", 
         borderRadius: "25px"
     }}>
         <Box sx={{
             padding: "8px",
             display: "flex", 
             justifyContent: "center", 
-            width: "90%", 
-            background: "green", 
+            width: "60%", 
+            background: "#007600", 
             fontFamily: "Bungee", 
             color: "white",
             borderRadius: "10px" 
@@ -236,7 +236,7 @@ const tablet__window__losing = (
         backgroundPosition: "center", 
         backgroundRepeat: "no-repeat",   
         display: "flex", 
-        left: 0, 
+        left: "8%", 
         top: "50%",
         transform: "translate(9%, -50%)",  
         zIndex: 5, 
@@ -244,16 +244,16 @@ const tablet__window__losing = (
         fontSize: "2em", 
         flexDirection: "column", 
         justifyContent: "space-around", 
-        width: "85%", 
-        height: "40%", 
+        width: "70%", 
+        height: "35%", 
         borderRadius: "25px"
     }}>
         <Box sx={{
             padding: "8px", 
             display: "flex", 
             justifyContent: "center", 
-            width: "90%", 
-            background: "red", 
+            width: "60%", 
+            background: "#c80000", 
             fontFamily: "Bungee", 
             color: "white", 
             borderRadius: "10px"
