@@ -6,6 +6,8 @@ import { showTextAnimation, hideTextAnimation } from "../animations/animations";
 import { theme } from "../styles/style";
 import "../styles/style.css"; 
 import useMediaQuery from "@mui/material/useMediaQuery";
+import backgroundVideo from "../../public/video_background.mp4"; 
+
 
 export const HomePage = ({onClick, screenWidth, screenHeight}) => {
     const [hideText, setHideText] = useState(false); 
@@ -225,7 +227,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     height: "100%", 
                 }}>
                     <video autoPlay muted loop style={{width: "100%", height: "100%", objectFit: "fill"}}>
-                        <source src="../../public/video_background.mp4" />
+                        <source src={backgroundVideo}/>
                     </video>
                 </Box>
                 {text}
