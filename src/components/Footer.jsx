@@ -18,7 +18,7 @@ export const Footer = ({screenHeight, onClick, audioPlaying}) => {
 
     function handleClick() {
         setPopup(true); 
-        helpPopupRef.current.volume = 0.5; 
+        helpPopupRef.current.volume = 0.6; 
         helpPopupRef.current.play(); 
     }
 

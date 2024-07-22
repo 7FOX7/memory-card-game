@@ -93,6 +93,7 @@ function App() {
       setGameShouldEnd(true)
     }
     else {
+      flippingRef.current.volume = 1; 
       flippingRef.current.play(); 
       setClickedCards(clickedCards);
       setIsFlipped(true); 
