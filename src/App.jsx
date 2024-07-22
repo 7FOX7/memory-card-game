@@ -196,8 +196,8 @@ function App() {
           })}
         </CardBoard>
         <RoundDisplayer currentRound={currentRound} lastRound={lastRound}/>
+        <Footer screenHeight={screenHeight} onClick={handleAudioPlaying} audioPlaying={audioPlaying} />
       </MainBody>
-      <Footer screenHeight={screenHeight} onClick={handleAudioPlaying} audioPlaying={audioPlaying}/>
       <audio ref={flippingRef}>
         <source src={flip_sound}/>
       </audio>

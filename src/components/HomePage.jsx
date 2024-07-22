@@ -228,7 +228,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
                     width: "100%", 
                     height: "100%", 
                 }}>
-                    <video autoPlay muted loop style={{width: "100%", height: "100%", objectFit: "fill"}}>
+                    <video autoPlay muted loop paysInline style={{width: "100%", height: "100%", objectFit: "fill"}}>
                         <source src={background_video}/>
                     </video>
                 </Box>

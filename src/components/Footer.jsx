@@ -27,7 +27,7 @@ export const Footer = ({screenHeight, onClick, audioPlaying}) => {
     }
 
     return (
-        <Box className="footer" sx={{display: "flex", flexDirection: "column", width: "100%", height: "12%"}}>
+        <Box  sx={{display: "flex", flexDirection: "column", width: "100%", height: "12%"}}>
             <Box sx={{background: "linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%)", width: "100%", height: "38%", position: "relative", top: "2%"}}></Box>
             <Box sx={{background: "rgb(0, 0, 0)", width: "100%", height: "70%", display: "flex", justifyContent: "space-around", alignItems: "center", overflow: "hidden", paddingBlock: "5px"}}>
                 <Box>

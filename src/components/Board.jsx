@@ -19,7 +19,7 @@ export const Board = ({children, screenWidth, screenHeight}) => {
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 
                     flexDirection: "column", 
-                    justifyContent: "space-between"
+                    overflow: "hidden"
                 }}>
                 {children}
                 </Box>
@@ -32,7 +32,8 @@ export const Board = ({children, screenWidth, screenHeight}) => {
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 
                     flexDirection: "column", 
-                    justifyContent: "space-between"
+                    justifyContent: "space-between", 
+                    overflow: "hidden"
                 }}>
                 {children}
                 </Box>
