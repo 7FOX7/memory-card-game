@@ -103,6 +103,7 @@ function App() {
       setPlayMode(false);
       setBestScore(0); 
     }
+    setIsFlipped(false); 
     setCards(shuffle(cards)); 
     setClickedCards([]); 
     setScore(0); 
