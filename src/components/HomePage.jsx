@@ -29,11 +29,11 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
     useEffect(() => {
         if(isMobile) {
             setFontSize('2rem'); 
-            setContainerWidth('75%'); 
-            setContainerHeight('45%'); 
-            setContainerLeftDirection('-25%'); 
-            setButtonWidth('80%'); 
-            setButtonFontSize('1.3rem'); 
+            setContainerWidth('70%'); 
+            setContainerHeight('42%'); 
+            setContainerLeftDirection('-20%'); 
+            setButtonWidth('70%'); 
+            setButtonFontSize('1.2rem'); 
             setTextLeftDirection('20%'); 
         }
         else if(isTablet) {
@@ -95,7 +95,7 @@ export const HomePage = ({onClick, screenWidth, screenHeight}) => {
         <>
             <Box sx={{
             width: "100vw", 
-            height: "100vh", 
+            height: `${isMobile ? "90vh" : "100vh"}`, 
             overflow: "hidden"
         }}>
             <Box sx={{
