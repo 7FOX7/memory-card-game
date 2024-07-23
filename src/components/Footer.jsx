@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {useRef} from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import Box from '@mui/material/Box';
@@ -11,11 +12,11 @@ import {help_popup_sound} from '../data/data';
 import {help_popup_art} from '../data/data';
 
 export const Footer = ({screenHeight, onClick, audioPlaying}) => {
+    const isMobile = useMediaQuery(theme.breakpoints.down('tablet')); 
     const helpPopupRef = useRef(null); 
     const [popup, setPopup] = useState(null); 
     const open = Boolean(popup); 
-    const top = Math.floor(screenHeight / 1.34); 
-
+    const top = isMobile ?  Math.floor(screenHeight / 1.5) : Math.floor(screenHeight / 1.32); 
     function handleClick() {
         setPopup(true); 
         helpPopupRef.current.volume = 0.6; 

@@ -13,12 +13,13 @@ export const Board = ({children, screenWidth, screenHeight}) => {
             {isMobile ? (
                 <Box sx={{
                     width: "100vw",
-                    height: "100vh",
+                    height: "90vh",
                     backgroundImage: `url(${background})`,
                     backgroundSize: `${updatedWidth}px ${screenHeight}px`, 
                     backgroundRepeat: "no-repeat", 
                     display: "flex", 
                     flexDirection: "column", 
+                    justifyContent: "space-between", 
                     overflow: "hidden"
                 }}>
                 {children}
